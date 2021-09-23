@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   #LOGGIN
   def login
     @user = User.find_by(username: params[:username])
-    logger.debug("^--------#{params}")
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token}
